@@ -11,7 +11,7 @@ const app= express();
 app.use(express.json())
 app.use(cors())
 app.get("/",(req,res)=>{
-res.send({hello})
+res.send("welcome to ecomerce-8386 backend")
 })
 app.use("/users",userRoute)
 app.use("/admins",AdminRoute)
