@@ -8,18 +8,20 @@ const { productRoute } = require("./Route/ProductRoute");
 const { AdminRoute } = require("./Route/AdminRoute");
 const { CartRoute } = require("./Route/CartRoute");
 const { todoRoute } = require("./Route/todoRoute");
+const { AppointmentRoute } = require("./Route/AppointmentRoute");
 
 const app= express();
 app.use(express.json())
 app.use(cors())
 app.get("/",(req,res)=>{
-res.send("welcome to ecomerce-8386 backend")
+res.send("welcome to my backend server")
 })
 app.use("/users",userRoute)
 app.use("/admins",AdminRoute)
 app.use("/products",productRoute)
 app.use("/cart",CartRoute)
 app.use("/todo",todoRoute)
+app.use("/appointment",AppointmentRoute)
 
 app.use((err,req,res,next)=>{
   if(err){
