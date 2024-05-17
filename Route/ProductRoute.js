@@ -15,7 +15,7 @@ const productRoute = express.Router();
 
 productRoute.get("/", async (req, res) => {
   try {
-    const { category, rating, gender,name, q, sort,order, page, limit } = req.query;
+    const { category, rating, gender,name, q, sort,order, page, limit,fromPrice ,toPrice  } = req.query;
     // console.log({category, rating, gender, q, sort,order, page, limit});
     //  for example  basic Url = "http://localhost:8080/movie?page=2&limit=2&sortBy=asc"
 
@@ -40,6 +40,11 @@ query.category=category
     if (rating) {
       query.rating = parseFloat(rating);
     }
+    if(fromPrice&&toPrice){
+      query.price={$gte:fromPrice,$lte:toPrice}
+    }
+
+
 
     //  if any query is in query it is special for title
     if (q) {
@@ -59,7 +64,7 @@ query.category=category
     }
 
     const pageNumber = parseInt(page) || 1; // page come form query if not then by default 1
-    const pageSize = parseInt(limit) || 10; // limit come form query if not then by default 10
+    const pageSize = parseInt(limit) || 12; // limit come form query if not then by default 10
     const totalproduct = await ProductModel.countDocuments(query); // it is use for count totle Movies
     const totalPages = Math.ceil(totalproduct / pageSize); // logic for find total page
 
